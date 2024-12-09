@@ -1,0 +1,716 @@
+setup: |
+  echo "🐊 Attempt to install security engineering tools"
+  echo "🐊 Will not re-install if already installed"
+  poetry install
+# The numerical value is a raw percentage that
+# represents the goal for claiming attainment
+# of the program learning objective
+targets:
+  PLO1:
+    - R: 80
+  PLO2:
+    - R: 80
+
+# The numerical value is a raw number of checks
+# that sets a >= threshold for the learning level
+thresholds:
+  # Both PLO1 and PLO2 --> CLO2 and CLO3
+  CS: 
+    # PLO1 --> CLO3 = 5 total CLO-based checks
+    PLO1:
+      - N: 0
+      - I: 1
+      - D: 2
+      - R: 3
+      - P: 4
+    # PLO2 --> CLO2 = 6 total CLO-based checks
+    PLO2:
+      - N: 0
+      - I: 2
+      - D: 3
+      - R: 4
+      - P: 5
+  # Both PLO1 and PLO2 --> CLO1 through CLO5
+  SE: 
+    # PLO1 --> CLO2 (6) + CLO5 (17) = 23 total CLO-based checks
+    PLO1:
+      - N: 0
+      - I: 6
+      - D: 12
+      - R: 18
+      - P: 22
+    # PLO2 --> CLO1 (4) + CLO3 (4) + CLO4 (9) = 17 total CLO-based checks
+    PLO2:
+      - N: 0
+      - I: 4
+      - D: 8
+      - R: 12
+      - P: 16
+---
+
+# Learning Outcome Mappings {{{
+
+# CS: 
+#   - PLO1:
+#      - CLO3:
+#        - description: Correctly use hardware and/or software tools to diagnose
+#          and fix web and network security vulnerabilities.
+#        - level: R
+#   - PLO2:
+#      - CLO2:
+#        - description: Correctly apply security principles, memory management
+#          strategies, architectural and algorithmic principles, and
+#          cryptography in the modeling and implementation of security
+#          solutions.
+#        - level: R
+
+# SE: 
+#   - PLO1:
+#      - CLO2:
+#        - description: Correctly apply security principles, memory management
+#          strategies, architectural and algorithmic principles, and
+#          cryptography in the modeling and implementation of security
+#          solutions.
+#        - level: R
+#      - CLO5:
+#        - description: Design, implement, document, test, and explain secure software
+#          with an emphasis on social political, legal, and ethical vulnerabilities.
+#        - level: R
+#   - PLO2:
+#      - CLO1:
+#        - description: Correctly identify the threats to an application's security and
+#          describe the suitable mitigation(s) for addressing the threats.
+#        - level: D
+#      - CLO3:
+#        - description: Correctly use hardware and/or software tools to diagnose
+#          and fix web and network security vulnerabilities.
+#        - level: D
+#      - CLO4:
+#         - description: Evaluate the effectiveness of various hardware and
+#         software systems with respect to computer security.
+#         - level: D
+
+# }}}
+
+# Honor Code {{{
+
+- ../README.md:
+    - description: Ensure that the README.md file exists inside of the root of the GitHub repository
+      check: ConfirmFileExists
+    - description: Delete the phrase 'Add Your Name Here' and add your own name as an Honor Code pledge in README.md
+      check: MatchFileFragment
+      options:
+        fragment: "Add Your Name Here"
+        count: 0
+        exact: true
+    - description: Retype the every word in the Honor Code pledge in README.md
+      check: MatchFileFragment
+      options:
+        fragment: "I adhered to the Allegheny College Honor Code while completing this executable examination."
+        count: 3
+        exact: true
+    - description: Indicate that you have completed all of the tasks in the README.md
+      check: MatchFileFragment
+      options:
+        fragment: "- [X]"
+        count: 11
+        exact: true
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for README.md 
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+
+# }}}
+
+# Basic Program Characteristics {{{
+
+# Question 1
+
+# perform checks on the program file
+- questions/question_one.py:
+    # --> file exists in the correct directory
+    - description: Ensure that question_one.py file exists in the questions/ directory
+      check: ConfirmFileExists
+    # --> no remaining TODO markers in the source code
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for question_one.py
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    # --> contains suitable number of docstrings for both module and the function (note, differs from symbex)
+    - description: Create a sufficient number of docstring (i.e., multiple-line) comments in question_one.py
+      check: CountMultipleLineComments
+      options:
+        language: "Python"
+        count: 15
+        exact: true
+    # --> contains suitable number of single-line comments (note, differs from symbex)
+    - description: Create a sufficient number of single-line comments in question_one.py
+      check: CountSingleLineComments
+      options:
+        language: "Python"
+        count: 20
+        exact: false
+
+# perform checks on the test file
+- tests/test_question_one.py:
+    # --> file exists in the correct directory
+    - description: Ensure that test_question_one.py file exists in the tests/ directory
+      check: ConfirmFileExists
+
+# Question 2
+
+# perform checks on the program file
+- questions/question_two.py:
+    # --> file exists in the correct directory
+    - description: Ensure that question_two.py file exists in the questions/ directory
+      check: ConfirmFileExists
+    # --> no remaining TODO markers in the source code
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for question_two.py
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    # --> contains suitable number of docstrings for both module and the function (note, differs from symbex)
+    - description: Create a sufficient number of docstring (i.e., multiple-line) comments in question_two.py
+      check: CountMultipleLineComments
+      options:
+        language: "Python"
+        count: 11
+        exact: true
+    # --> contains suitable number of single-line comments (note, differs from symbex)
+    - description: Create a sufficient number of single-line comments in question_two.py
+      check: CountSingleLineComments
+      options:
+        language: "Python"
+        count: 20
+        exact: false
+
+# perform checks on the test file
+- tests/test_question_two.py:
+    # --> file exists in the correct directory
+    - description: Ensure that test_question_two.py file exists in the tests/ directory
+      check: ConfirmFileExists
+
+# Question 3
+
+# perform checks on the program file
+- questions/question_three.py:
+    # --> file exists in the correct directory
+    - description: Ensure that question_three.py file exists in the questions/ directory
+      check: ConfirmFileExists
+    # --> no remaining TODO markers in the source code
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for question_three.py
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    # --> contains suitable number of docstrings for both module and the function (note, differs from symbex)
+    - description: Create a sufficient number of docstring (i.e., multiple-line) comments in question_three.py
+      check: CountMultipleLineComments
+      options:
+        language: "Python"
+        count: 6
+        exact: true
+    # --> contains suitable number of single-line comments (note, differs from symbex)
+    - description: Create a sufficient number of single-line comments in question_three.py
+      check: CountSingleLineComments
+      options:
+        language: "Python"
+        count: 20
+        exact: false
+
+# perform checks on the test file
+- tests/test_question_three.py:
+    # --> file exists in the correct directory
+    - description: Ensure that test_question_three.py file exists in the tests/ directory
+      check: ConfirmFileExists
+
+# Question 4
+
+# perform checks on the program file
+- questions/question_four.py:
+    # --> file exists in the correct directory
+    - description: Ensure that question_four.py file exists in the questions/ directory
+      check: ConfirmFileExists
+    # --> no remaining TODO markers in the source code
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for question_four.py
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    # --> contains suitable number of docstrings for both module and the function (note, differs from symbex)
+    - description: Create a sufficient number of docstring (i.e., multiple-line) comments in question_four.py
+      check: CountMultipleLineComments
+      options:
+        language: "Python"
+        count: 15
+        exact: true
+    # --> contains suitable number of single-line comments (note, differs from symbex)
+    - description: Create a sufficient number of single-line comments in question_four.py
+      check: CountSingleLineComments
+      options:
+        language: "Python"
+        count: 20
+        exact: false
+
+# perform checks on the test file
+- tests/test_question_four.py:
+    # --> file exists in the correct directory
+    - description: Ensure that test_question_four.py file exists in the tests/ directory
+      check: ConfirmFileExists
+
+
+# }}}
+
+# Executable Examination Checks {{{
+
+# Question 1
+
+- description: Run checks for Question 1 Part (a) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_one_part_a" --debug --no-fancy --report status --report debug
+  objectives:
+    CLO2:
+      degree:
+        - CS: "R"
+          rationale: "Correctly implement the Caesar cipher."
+        - SE: "R"
+          rationale: "Correctly implement the Caesar cipher."
+    CLO3:
+      degree:
+        - SE: "R"
+          rationale: "Perform secure network communication with a client using Caesar cipher."
+
+- description: Run checks for Question 1 Part (b) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_one_part_b" --no-fancy --report status --report setup --report debug
+  objectives:
+    CLO2:
+      degree:
+        - CS: "R"
+          rationale: "Correctly implement the Latin alphabet cipher."
+        - SE: "R"
+          rationale: "Correctly implement the Latin alphabet cipher."
+
+- description: Run checks for Question 1 Part (c) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_one_part_c" --no-fancy --report status --report setup --report debug
+  objectives:
+    CLO2:
+      degree:
+        - CS: "R"
+          rationale: "Correctly implement reverse string cryptography with a dictionary."
+        - SE: "R"
+          rationale: "Correctly implement reverse string cryptography with a dictionary."
+
+- description: Run checks for Question 1 Part (d) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_one_part_d" --no-fancy --report status --report setup --report debug
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement and test a general-purpose function for cryptography."
+
+# Question 2
+
+- description: Run checks for Question 2 Part (a) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_two_part_a" --debug --no-fancy --report status --report debug
+  objectives:
+    CLO2:
+      degree:
+        - CS: "R"
+          rationale: "Correctly implement the atbash cipher."
+        - SE: "R"
+          rationale: "Correctly implement the atbash cipher."
+
+- description: Run checks for Question 2 Part (b) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_two_part_b" --no-fancy --report status --report setup --report debug
+  objectives:
+    CLO2:
+      degree:
+        - CS: "R"
+          rationale: "Correctly implement a comprehensive transposition cipher."
+        - SE: "R"
+          rationale: "Correctly implement a comprehensive transposition cipher."
+
+- description: Run checks for Question 2 Part (c) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_two_part_c" --no-fancy --report status --report setup --report debug
+  objectives:
+    CLO2:
+      degree:
+        - CS: "R"
+          rationale: "Correctly implement encryption and decryption with ROT13."
+        - SE: "R"
+          rationale: "Correctly implement encryption and decryption with ROT13."
+
+- description: Run checks for Question 2 Part (d) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_two_part_d" --no-fancy --report status --report setup --report debug
+  objectives:
+    CLO3:
+      degree:
+        - CS: "R"
+          rationale: "Implement a general-purpose cryptography system that supports JSON-based network encoding."
+        - SE: "D"
+          rationale: "Implement a general-purpose cryptography system that supports JSON-based network encoding."
+
+# Question 3
+
+- description: Run checks for Question 3 Part (a) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_three_part_a" --debug --no-fancy --report status --report debug
+  objectives:
+    CLO1:
+      degree:
+        - SE: "D"
+          rationale: "Correctly identify the threat of malware and implement a debugging statement mitigation."
+
+- description: Run checks for Question 3 Part (b) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_three_part_b" --no-fancy --report status --report setup --report debug
+  objectives:
+    CLO1:
+      degree:
+        - SE: "D"
+          rationale: "Correctly identify the threat of a weak cryptosystem and implement word crytanalysis."
+
+- description: Run checks for Question 3 Part (c) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_three_part_c" --no-fancy --report status --report setup --report debug
+  objectives:
+    CLO1:
+      degree:
+        - SE: "D"
+          rationale: "Correctly identify the threat of a weak cryptosystem and implement non-word crytanalysis."
+
+- description: Run checks for Question 3 Part (d) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_three_part_d" --no-fancy --report status --report setup --report debug
+  objectives:
+    CLO1:
+      degree:
+        - SE: "D"
+          rationale: "Correctly identify the threat of malware and implement a while loop mitigation."
+
+# Question 4
+
+- description: Run checks for Question 4 Part (a) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_four_part_a" --debug --no-fancy --report status --report debug
+  objectives:
+    CLO3:
+      degree:
+        - CS: "R"
+          rationale: "Correctly identify multiple daemons that are insecurely running on the same port."
+
+- description: Run checks for Question 4 Part (b) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_four_part_b" --debug --no-fancy --report status --report debug
+  objectives:
+    CLO3:
+      degree:
+        - CS: "R"
+          rationale: "Correctly identify whether or not there are network daemons that have crashed."
+
+- description: Run checks for Question 4 Part (c) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_four_part_c" --debug --no-fancy --report status --report debug
+  objectives:
+    CLO4:
+      degree:
+        - SE: "D"
+          rationale: "Correctly assign numerical scores for the effectiveness of authentication and authorization."
+
+- description: Run checks for Question 4 Part (d) with 'execexam' command and confirm correct exit code
+  command: poetry run execexam . tests/ --mark "question_four_part_d" --debug --no-fancy --report status --report debug
+  objectives:
+    CLO3:
+      degree:
+        - SE: "D"
+          rationale: "Correctly diagnose average level of network vulnerability with CVSS scores."
+
+# }}}
+
+# Program Analysis with Software Engineering Tools {{{
+
+# Question 1
+
+# run a command: ruff check with default settings found in .ruff.toml file
+- description: Ensure that Question 1 follows industry-standard rules using the command 'ruff check'
+  command: poetry run ruff check questions/question_one.py
+  objectives:
+    CLO4:
+      degree:
+        - SE: "D"
+          rationale: "Evaluate the adherence to industry standards for implementation of secure algorithms."
+
+# run a command: ruff format with default settings found in .ruff.toml file
+- description: Ensure that Question 1 adheres to an industry-standard format using the command 'ruff format'
+  command: poetry run ruff format questions/question_one.py --check
+  objectives:
+    CLO4:
+      degree:
+        - SE: "D"
+          rationale: "Evaluate the adherence to industry standards for implementation of secure algorithms."
+
+# run a command: mypy with the default settings to confirm type alignment for all functions
+- description: Ensure that Question 1 has correct type annotations using the command 'mypy'
+  command: poetry run mypy questions/question_one.py
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using correct type annotations."
+
+# run symbex: count functions with full type annotations
+- description: Ensure that Question 1 has correct number of fully type annotated functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --fully-typed -f questions/question_one.py --count"
+    fragment: 10
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using correct type annotations."
+
+# run symbex: count functions with docstring-based documentation (note: does not count module docstring)
+- description: Ensure that Question 1 has correct number of documented functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --documented -f questions/question_one.py --count"
+    fragment: 11
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using industry-standard documentation."
+
+# run symbex: confirm that there are no functions that are undocumented (i.e., do not have a docstring)
+- description: Ensure that Question 1 has no undocumented functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --undocumented -f questions/question_one.py --count"
+    fragment: 0
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using industry-standard documentation."
+
+# Question 2
+
+# run a command: ruff check with default settings found in .ruff.toml file
+- description: Ensure that Question 2 follows industry-standard rules using the command 'ruff check'
+  command: poetry run ruff check questions/question_two.py
+  objectives:
+    CLO4:
+      degree:
+        - SE: "D"
+          rationale: "Evaluate the adherence to industry standards for implementation of secure algorithms."
+
+# run a command: ruff format with default settings found in .ruff.toml file
+- description: Ensure that Question 2 adheres to an industry-standard format using the command 'ruff format'
+  command: poetry run ruff format questions/question_two.py --check
+  objectives:
+    CLO4:
+      degree:
+        - SE: "D"
+          rationale: "Evaluate the adherence to industry standards for implementation of secure algorithms."
+
+# run a command: mypy with the default settings to confirm type alignment for all functions
+- description: Ensure that Question 2 has correct type annotations using the command 'mypy'
+  command: poetry run mypy questions/question_two.py
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using correct type annotations."
+
+# run symbex: count functions with full type annotations
+- description: Ensure that Question 2 has correct number of fully type annotated functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --fully-typed -f questions/question_two.py --count"
+    fragment: 10
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using correct type annotations."
+
+# run symbex: count functions with docstring-based documentation (note: does not count module docstring)
+- description: Ensure that Question 2 has correct number of documented functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --documented -f questions/question_two.py --count"
+    fragment: 10
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using industry-standard documentation."
+
+# run symbex: confirm that there are no functions that are undocumented (i.e., do not have a docstring)
+- description: Ensure that Question 2 has no undocumented functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --undocumented -f questions/question_two.py --count"
+    fragment: 0
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using industry-standard documentation."
+
+# Question 3
+
+# run a command: ruff check with default settings found in .ruff.toml file
+- description: Ensure that Question 3 follows industry-standard rules using the command 'ruff check'
+  command: poetry run ruff check questions/question_three.py
+  objectives:
+    CLO4:
+      degree:
+        - SE: "D"
+          rationale: "Evaluate the adherence to industry standards for implementation of secure algorithms."
+
+# run a command: ruff format with default settings found in .ruff.toml file
+- description: Ensure that Question 3 adheres to an industry-standard format using the command 'ruff format'
+  command: poetry run ruff format questions/question_three.py --check
+  objectives:
+    CLO4:
+      degree:
+        - SE: "D"
+          rationale: "Evaluate the adherence to industry standards for implementation of secure algorithms."
+
+# run a command: mypy with the default settings to confirm type alignment for all functions
+- description: Ensure that Question 3 has correct type annotations using the command 'mypy'
+  command: poetry run mypy questions/question_three.py
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using correct type annotations."
+
+# run symbex: count functions with full type annotations
+- description: Ensure that Question 3 has correct number of fully type annotated functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --fully-typed -f questions/question_three.py --count"
+    fragment: 5
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using correct type annotations."
+
+# run symbex: count functions with docstring-based documentation (note: does not count module docstring)
+- description: Ensure that Question 3 has correct number of documented functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --documented -f questions/question_three.py --count"
+    fragment: 5
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using industry-standard documentation."
+
+# run symbex: confirm that there are no functions that are undocumented (i.e., do not have a docstring)
+- description: Ensure that Question 3 has no undocumented functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --undocumented -f questions/question_three.py --count"
+    fragment: 0
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using industry-standard documentation."
+
+# Question 4
+
+# run a command: ruff check with default settings found in .ruff.toml file
+- description: Ensure that Question 4 follows industry-standard rules using the command 'ruff check'
+  command: poetry run ruff check questions/question_four.py
+  objectives:
+    CLO4:
+      degree:
+        - SE: "D"
+          rationale: "Evaluate the adherence to industry standards for implementation of secure algorithms."
+
+# run a command: ruff format with default settings found in .ruff.toml file
+- description: Ensure that Question 4 adheres to an industry-standard format using the command 'ruff format'
+  command: poetry run ruff format questions/question_four.py --check
+  objectives:
+    CLO4:
+      degree:
+        - SE: "D"
+          rationale: "Evaluate the adherence to industry standards for implementation of secure algorithms."
+
+# run a command: mypy with the default settings to confirm type alignment for all functions
+- description: Ensure that Question 4 has correct type annotations using the command 'mypy'
+  command: poetry run mypy questions/question_four.py
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using correct type annotations."
+
+# run symbex: count functions with full type annotations
+- description: Ensure that Question 4 has correct number of fully type annotated functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --fully-typed -f questions/question_four.py --count"
+    fragment: 5
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using correct type annotations."
+
+# run symbex: count functions with docstring-based documentation (note: does not count module docstring)
+- description: Ensure that Question 4 has correct number of documented functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --documented -f questions/question_four.py --count"
+    fragment: 8
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using industry-standard documentation."
+
+# run symbex: confirm that there are no functions that are undocumented (i.e., do not have a docstring)
+- description: Ensure that Question 4 has no undocumented functions using the command 'symbex'
+  check: MatchCommandFragment
+  options:
+    command: "poetry run symbex -s --undocumented -f questions/question_four.py --count"
+    fragment: 0
+    count: 1
+    exact: true
+  objectives:
+    CLO5:
+      degree:
+        - SE: "R"
+          rationale: "Implement a security solution using industry-standard documentation."
+
+# }}}
