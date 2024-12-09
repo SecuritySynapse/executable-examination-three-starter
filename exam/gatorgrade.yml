@@ -38,13 +38,13 @@ thresholds:
       - D: 12
       - R: 18
       - P: 22
-    # PLO2 --> CLO1 (4) + CLO3 (4) + CLO4 (9) = 17 total CLO-based checks
+    # PLO2 --> CLO1 (4) + CLO3 (5) + CLO4 (9) = 18 total CLO-based checks
     PLO2:
       - N: 0
       - I: 4
       - D: 8
       - R: 12
-      - P: 16
+      - P: 17
 ---
 
 # Learning Outcome Mappings {{{
