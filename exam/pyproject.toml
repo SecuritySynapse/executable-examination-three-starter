@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "questions"
+version = "0.1.0"
+description = ""
+authors = ["Gregory M. Kapfhammer <gkapfham@allegheny.edu>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+symbex = "^1.4"
+pytest-json-report = "^1.5.0"
+pytest = "^8.3.3"
+execexam = "^0.3.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.1.1"
+mypy = "^1.9.0"
+ruff = {version = "^0.6.3"}
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "error",
+]
+enable_assertion_pass_hook = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
