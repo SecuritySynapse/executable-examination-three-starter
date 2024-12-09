@@ -5,8 +5,6 @@
 # You must reorganize and/or add the imports so that they adhere
 # to the industry best practices for Python source code.
 
-from typing import Dict, List
-
 # Introduction: Read This First! {{{
 
 # Keep in mind these considerations as you implement the required functions:
@@ -75,14 +73,7 @@ class Daemon:
         return self.status.lower() == "running"
 
 
-def check_duplicate_ports(daemons: list[Daemon]) -> bool:
-    """Check if there are two daemons running on the same port."""
-    port_map = {}
-    for daemon in daemons:
-        if daemon.is_running():
-            if daemon.port in port_map:
-                return True
-            port_map[daemon.port] = daemon
+def check_duplicate_ports(daemons):
     return False
 
 
@@ -116,13 +107,8 @@ def check_duplicate_ports(daemons: list[Daemon]) -> bool:
 # to industry best practices for Python source code. You may need to add a docstring
 # so that this function is correctly documented by an software engineer using it.
 
-
-def check_non_running_services(daemons: list[Daemon], service_names: list[str]) -> bool:
-    """Check if any services in the list of daemon names have an instance that is not running."""
-    for daemon in daemons:
-        if daemon.name in service_names and not daemon.is_running():
-            return True
-    return False
+def check_non_running_services(daemons, service_names):
+    return True
 
 
 # }}}
@@ -189,64 +175,14 @@ class SecurityEvent:
         self.correct_label = correct_label  # True if allowed, False if denied
 
 
-def calculate_confusion_matrix(events: List[SecurityEvent]) -> Dict[str, int]:
+def calculate_confusion_matrix(events):
     """Calculate the confusion matrix based on the provided list of security events and their classification."""
-    true_positive = sum(
-        1 for event in events if event.prediction and event.correct_label
-    )
-    true_negative = sum(
-        1 for event in events if not event.prediction and not event.correct_label
-    )
-    false_positive = sum(
-        1 for event in events if event.prediction and not event.correct_label
-    )
-    false_negative = sum(
-        1 for event in events if not event.prediction and event.correct_label
-    )
-    return {
-        "true_positive": true_positive,
-        "true_negative": true_negative,
-        "false_positive": false_positive,
-        "false_negative": false_negative,
-    }
+    return {}
 
 
-def calculate_security_metrics(events: List[SecurityEvent]) -> Dict[str, float]:
+def calculate_security_metrics(events):
     """Calculate security metrics based on the provided list of security events and their classification."""
-    true_positive = sum(
-        1 for event in events if event.prediction and event.correct_label
-    )
-    true_negative = sum(
-        1 for event in events if not event.prediction and not event.correct_label
-    )
-    false_positive = sum(
-        1 for event in events if event.prediction and not event.correct_label
-    )
-    false_negative = sum(
-        1 for event in events if not event.prediction and event.correct_label
-    )
-    precision = (
-        true_positive / (true_positive + false_positive)
-        if (true_positive + false_positive) > 0
-        else 0
-    )
-    recall = (
-        true_positive / (true_positive + false_negative)
-        if (true_positive + false_negative) > 0
-        else 0
-    )
-    accuracy = (true_positive + true_negative) / len(events) if len(events) > 0 else 0
-    f1_score = (
-        (2 * precision * recall) / (precision + recall)
-        if (precision + recall) > 0
-        else 0
-    )
-    return {
-        "precision": precision,
-        "recall": recall,
-        "accuracy": accuracy,
-        "f1_score": f1_score,
-    }
+    return {}
 
 
 # }}}
@@ -304,12 +240,9 @@ class SecurityVulnerability:
         )
 
 
-def calculate_average_cvss(vulnerabilities: list[SecurityVulnerability]) -> float:
+def calculate_average_cvss(vulnerabilities):
     """Calculate the average CVSS score from a list of SecurityVulnerability instances."""
-    if not vulnerabilities:
-        return 0.0
-    total_score = sum(vul.cvss_score for vul in vulnerabilities)
-    return total_score / len(vulnerabilities)
+    return 0.0
 
 
 # }}}
