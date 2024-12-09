@@ -12,7 +12,7 @@ targets:
     - R: 80
 
 # The numerical value is a raw number of checks
-# that sets a >= threshold for the learning level
+# that sets a threshold for the learning level
 thresholds:
   # Both PLO1 and PLO2 --> CLO2 and CLO3
   CS: 
