@@ -10,7 +10,6 @@ targets:
     - R: 80
   PLO2:
     - R: 80
-
 # The numerical value is a raw number of checks
 # that sets a threshold for the learning level
 thresholds:
