@@ -5,8 +5,8 @@
 # You must reorganize and/or add the imports so that they adhere
 # to the industry best practices for Python source code.
 
-import math
 from typing import Callable, List
+import math
 
 # Introduction: Read This First! {{{
 
