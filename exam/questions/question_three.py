@@ -1,6 +1,6 @@
 """Question Three: Executable Examination."""
 
-# Note: The imports in the following source code block may no longer
+# TODO: The imports in the following source code block may no longer
 # adhere to the industry best practices for Python source code.
 # You must reorganize and/or add the imports so that they adhere
 # to the industry best practices for Python source code.
@@ -46,11 +46,11 @@ import ast
 # determine if the malware is being debugged or not. The final question part
 # in this file will further develop and explore this idea of malware analysis.
 
-# Note: This function may not not have all of the correct type annotations for
+# TODO: This function may not not have all of the correct type annotations for
 # certain variables. You must add all of any needed type annotations
 # so that the function and any code that uses it passes the type checker.
 
-# Note: This function may not have a docstring and thus it may not adhere
+# TODO: This function may not have a docstring and thus it may not adhere
 # to industry best practices for Python source code. You may need to add a docstring
 # so that this function is correctly documented by an software engineer using it.
 
@@ -79,11 +79,11 @@ def count_print_functions_malware_analysis(source_code):
 # would support the cryptanalysis of a text that was encrypted. You can think of
 # this function as performing a type of "frequency analysis" on the text.
 
-# Note: This function may not not have all of the correct type annotations for
+# TODO: This function may not not have all of the correct type annotations for
 # certain variables. You must add all of any needed type annotations
 # so that the function and any code that uses it passes the type checker.
 
-# Note: This function may not have a docstring and thus it may not adhere
+# TODO: This function may not have a docstring and thus it may not adhere
 # to industry best practices for Python source code. You may need to add a docstring
 # so that this function is correctly documented by an software engineer using it.
 
@@ -113,11 +113,11 @@ def count_words_cryptanalysis(text):
 # would support the cryptanalysis of a text that was encrypted. You can think of
 # this function as performing another type of "frequency analysis" on the text.
 
-# Note: This function may not not have all of the correct type annotations for
+# TODO: This function may not not have all of the correct type annotations for
 # certain variables. You must add all of any needed type annotations
 # so that the function and any code that uses it passes the type checker.
 
-# Note: This function may not have a docstring and thus it may not adhere
+# TODO: This function may not have a docstring and thus it may not adhere
 # to industry best practices for Python source code. You may need to add a docstring
 # so that this function is correctly documented by an software engineer using it.
 
@@ -161,11 +161,11 @@ def count_spaces_and_newlines_cryptanalysis(text):
 # inside of a malware sample. This could perhaps help the malware analyst to
 # determine if the malware matches a signature of how a known malware iterates.
 
-# Note: This function may not not have all of the correct type annotations for
+# TODO: This function may not not have all of the correct type annotations for
 # certain variables. You must add all of any needed type annotations
 # so that the function and any code that uses it passes the type checker.
 
-# Note: This function may not have a docstring and thus it may not adhere
+# TODO: This function may not have a docstring and thus it may not adhere
 # to industry best practices for Python source code. You may need to add a docstring
 # so that this function is correctly documented by an software engineer using it.
 
