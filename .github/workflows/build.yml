@@ -1,0 +1,96 @@
+# Basic workflow
+name: build
+
+# Allow write permissions
+permissions:
+  contents: write
+
+# Use more columns for terminal output
+env:
+  COLUMNS: 120
+  PYTHONIOENCODING: utf8
+
+# Controls when the action will run
+# Workflow begins with push or PR events
+# Focuses on the main branch only
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# Create one single job
+# This job performs all necessary checks
+jobs:
+  build:
+    # do not allow a build to run for more than 5 minutes
+    timeout-minutes: 5
+    # Use the latest version of Ubuntu
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # Performs all actions on different versions of Python
+        python-version: ["3.12"]
+        os: [ubuntu-latest]
+    # Define the workflow steps
+    steps:
+    # Checkout the code of the repository
+        - name: Check out Repository Code
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+        # Setup Python for the current language version
+        - name: Setup Python ${{ matrix.python-version }}
+          if: always()
+          uses: actions/setup-python@v5
+          with:
+            python-version: ${{ matrix.python-version }}
+        # Install pip
+        - name: Install Pip
+          if: always()
+          run: |
+            pip install -U pip
+            python -m pip install --user pipx
+        # Install poetry
+        - name: Install Poetry and Project Dependencies
+          if: always()
+          run: |
+            pipx install poetry
+            pipx list
+            cd exam
+            poetry install
+        # Confirm correctness with execexam and show
+        # detailed report information
+        - name: Confirm Correctness with ExecExam
+          if: always()
+          run: |
+            cd exam
+            poetry run execexam . ./tests/ --report debug --report trace --report status --report failure --report code --report setup  --no-fancy --debug
+        # Run GatorGrader: use the gatorgrade.yml in repository's root;
+        # note that this runs execexam for some of the checks
+        - name: Run GatorGrader with GatorGrade
+          if: always()
+          run:  |
+           # pipx install gatorgrade
+           pipx install gatorgrade
+           pipx list
+           cd exam
+           gatorgrade --report env md GITHUB_STEP_SUMMARY
+        # Get the current time
+        - name: Get the Current Time
+          uses: josStorer/get-current-time@v2
+          if: always()
+          id: current-time
+          with:
+            format: YYYYMMDD-HH-mm-ss
+            utcOffset: "-05:00"
+        # Write the collected GatorGrade data to the designated branch
+        - name: Write Collected Data to Designated Branch
+          uses: GatorEducator/BranchWrite@v1.0.1
+          if: always()
+          with:
+            repo-token: ${{ secrets.GITHUB_TOKEN }}
+            branch: insight
+            path: insight/insight-report-${{steps.current-time.outputs.formattedTime}}.json
+            source: env
+            source-arg: JSON_REPORT
