@@ -278,12 +278,12 @@ def reverse_string_encrypt_dictionary(plaintexts):
 # so that this function is correctly documented by an software engineer using it.
 
 
-def general_encrypt(plaintext: str, encrypt_function: Callable):
+def general_encrypt(plaintext, encrypt_function: Callable):
     """Encrypt the provided plaintext using the specified encrypt function."""
     return ""
 
 
-def general_decrypt(ciphertext: str, decrypt_function: Callable):
+def general_decrypt(ciphertext, decrypt_function: Callable):
     """Decrypt the provided ciphertext using the specified decrypt function."""
     return ""
 
